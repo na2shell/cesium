@@ -142,6 +142,8 @@ function VRTheWorldTerrainProvider(options) {
       undefined,
       requestMetadata
     );
+    console.log("me");
+    console.error(e);
   }
 
   function requestMetadata() {
@@ -303,15 +305,20 @@ VRTheWorldTerrainProvider.prototype.requestTileGeometry = function (
   }
 
   var that = this;
-  return when(promise).then(function (image) {
-    return new HeightmapTerrainData({
-      buffer: getImagePixels(image),
-      width: that._heightmapWidth,
-      height: that._heightmapHeight,
-      childTileMask: getChildMask(that, x, y, level),
-      structure: that._terrainDataStructure,
+  return when(promise)
+    .then(function (image) {
+      return new HeightmapTerrainData({
+        buffer: getImagePixels(image),
+        width: that._heightmapWidth,
+        height: that._heightmapHeight,
+        childTileMask: getChildMask(that, x, y, level),
+        structure: that._terrainDataStructure,
+      });
+    })
+    .otherwise(function (e) {
+      console.error(e);
+      return when.reject(e);
     });
-  });
 };
 
 /**

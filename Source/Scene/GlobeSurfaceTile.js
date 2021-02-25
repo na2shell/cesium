@@ -563,7 +563,7 @@ function requestTileGeometry(surfaceTile, terrainProvider, x, y, level) {
     surfaceTile.request = undefined;
   }
 
-  function failure() {
+  function failure(e) {
     if (surfaceTile.request.state === RequestState.CANCELLED) {
       // Cancelled due to low priority - try again later.
       surfaceTile.terrainData = undefined;
@@ -595,6 +595,7 @@ function requestTileGeometry(surfaceTile, terrainProvider, x, y, level) {
       level,
       doRequest
     );
+    console.error(e);
   }
 
   function doRequest() {
