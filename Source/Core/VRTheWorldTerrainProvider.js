@@ -303,7 +303,6 @@ VRTheWorldTerrainProvider.prototype.requestTileGeometry = function (
   }
 
   var that = this;
-  console.log("hi there")
 
   function success(image) {
     return new HeightmapTerrainData({
