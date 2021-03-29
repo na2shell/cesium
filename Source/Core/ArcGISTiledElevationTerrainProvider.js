@@ -359,6 +359,7 @@ ArcGISTiledElevationTerrainProvider.prototype.requestTileGeometry = function (
   if (!defined(promise) || !defined(availabilityPromise)) {
     return undefined;
   }
+  console.log("hi thre!")
 
   var that = this;
   var tilesAvailable = this._tilesAvailable;

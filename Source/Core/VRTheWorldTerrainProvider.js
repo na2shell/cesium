@@ -303,7 +303,9 @@ VRTheWorldTerrainProvider.prototype.requestTileGeometry = function (
   }
 
   var that = this;
-  return when(promise).then(function (image) {
+  console.log("hi there")
+
+  function success(image) {
     return new HeightmapTerrainData({
       buffer: getImagePixels(image),
       width: that._heightmapWidth,
@@ -311,7 +313,15 @@ VRTheWorldTerrainProvider.prototype.requestTileGeometry = function (
       childTileMask: getChildMask(that, x, y, level),
       structure: that._terrainDataStructure,
     });
-  });
+  }
+
+  function failure(e) {
+    console.error(e)
+  }
+
+
+  return when(promise, success, failure)
+
 };
 
 /**
